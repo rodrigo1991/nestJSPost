@@ -29,17 +29,11 @@ export class Group {
         
 
     
-    @CreateDateColumn({ 
-        nullable:false,
-        name:'created'
-        })
+    @CreateDateColumn()
     created:Date;
         
 
-    @UpdateDateColumn({ 
-        nullable:false,
-        name:'updated'
-        })
+    @UpdateDateColumn()
     updated:Date;
         
 

@@ -20,17 +20,11 @@ export class Tag {
     name:string;
         
 
-    @CreateDateColumn({ 
-        nullable:false,
-        name:'created'
-        })
+    @CreateDateColumn()
     created:Date;
         
 
-    @UpdateDateColumn({ 
-        nullable:false,
-        name:'updated'
-        })
+    @UpdateDateColumn()
     updated:Date;
         
 

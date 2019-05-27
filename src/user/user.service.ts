@@ -39,6 +39,7 @@ export class UserService {
     }
     newUser.name = user.name;
     newUser.surname = user.surname;
+    newUser.birthdate = user.birthdate;
     newUser.created = user.created;
     newUser.updated = user.updated;
 

@@ -16,7 +16,7 @@ export class User {
         
 
    
-    @ManyToOne(type=>Group, groups=>groups.userss,{  nullable:false,onDelete: 'NO ACTION',onUpdate: 'NO ACTION' })
+    @ManyToOne(type=>Group, groups=>groups.userss,{  nullable:false,onDelete: 'NO ACTION',onUpdate: 'NO ACTION', eager: true})
     @JoinColumn({ name:'group_id'})
     group:Group | null;
 
@@ -41,20 +41,14 @@ export class User {
         nullable:false,
         name:'birthdate'
         })
-    birthdate:Date;
+    birthdate: Date;
         
 
-    @CreateDateColumn({ 
-        nullable:false,
-        name:'created'
-        })
+    @CreateDateColumn()
     created:Date;
         
 
-    @UpdateDateColumn({ 
-        nullable:false,
-        name:'updated'
-        })
+    @UpdateDateColumn()
     updated:Date;
         
 
