@@ -1,38 +1,38 @@
 import { Get, Post, Delete, Param, Controller, Put, Body } from '@nestjs/common';
 import { Request } from 'express';
-import { UsuarioService } from './usuario.service';
+import { UserService } from './user.service';
 
 import {
   ApiUseTags,
   ApiBearerAuth,
 } from '@nestjs/swagger';
-import { Usuario } from './usuario.entity';
+import { User } from './user.entity';
 
 @ApiBearerAuth()
 //@ApiUseTags('usuarios')
-@Controller('usuarios')
-export class UsuarioController {
+@Controller('users')
+export class UserController {
 
-  constructor(private readonly usuarioService: UsuarioService) {}
+  constructor(private readonly usuarioService: UserService) {}
 
   @Get()
-  async find(): Promise<Usuario[]> {
+  async find(): Promise<User[]> {
     return await this.usuarioService.findAll();
   }
 
   @Get(':id')
-  async findMe(@Param('id') id: number): Promise<Usuario> {
+  async findMe(@Param('id') id: number): Promise<User> {
     return await this.usuarioService.findById(id);
   }
 
   @Put(':id')
-  async update(@Param('id') id: number, @Body() usuario: Usuario) {
+  async update(@Param('id') id: number, @Body() usuario: User) {
     console.log(usuario);
     return await this.usuarioService.update(id, usuario);
   }
 
   @Post()
-  async create(@Body() usuario: Usuario) {
+  async create(@Body() usuario: User) {
     console.log(usuario);
     return this.usuarioService.create(usuario);
   }

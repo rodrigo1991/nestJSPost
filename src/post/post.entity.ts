@@ -1,9 +1,11 @@
 import {BaseEntity,Column,Entity,Index,JoinColumn,JoinTable,ManyToMany,ManyToOne,OneToMany,OneToOne,PrimaryColumn,PrimaryGeneratedColumn,RelationId, UpdateDateColumn, CreateDateColumn} from 'typeorm';
 import {User} from '../user/user.entity';
+import {Comment} from '../comment/comment.entity';
 
 
-@Entity('groups',{schema:'nestjsPost' } )
-export class Group {
+@Entity('posts',{schema:'nestjsPost' } )
+@Index('fk_posts_1_idx',['user',])
+export class Ppost {
 
     @PrimaryGeneratedColumn({
         type:'int', 
@@ -12,23 +14,20 @@ export class Group {
     id:number;
         
 
+   
+    @ManyToOne(type=>User, users=>users.postss,{  nullable:false,onDelete: 'NO ACTION',onUpdate: 'NO ACTION' })
+    @JoinColumn({ name:'user_id'})
+    user:User | null;
+
+
     @Column('varchar',{ 
         nullable:false,
         length:45,
-        name:'name'
+        name:'texto'
         })
-    name:string;
+    texto:string;
         
 
-    @Column('varchar',{ 
-        nullable:false,
-        length:200,
-        name:'description'
-        })
-    description:string;
-        
-
-    
     @CreateDateColumn({ 
         nullable:false,
         name:'created'
@@ -44,7 +43,7 @@ export class Group {
         
 
    
-    @OneToMany(type=>User, users=>users.group,{ onDelete: 'NO ACTION' ,onUpdate: 'NO ACTION' })
-    userss:User[];
+    @OneToMany(type=>Comment, comments=>comments.post,{ onDelete: 'NO ACTION' ,onUpdate: 'NO ACTION' })
+    comments:Comment[];
     
 }

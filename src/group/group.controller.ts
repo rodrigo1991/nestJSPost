@@ -7,16 +7,15 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { Group } from './group.entity';
-import { UsuarioService } from 'src/usuario/usuario.service';
-import { Usuario } from 'src/usuario/usuario.entity';
+import { UserService } from 'src/user/user.service';
+import { User } from 'src/user/user.entity';
 
 @ApiBearerAuth()
-//@ApiUseTags('groups')
 @Controller('groups')
 export class GroupController {
 
   constructor(private readonly groupService: GroupService,
-              private readonly usuarioService: UsuarioService) {}
+              private readonly usuarioService: UserService) {}
 
   @Get()
   async find(): Promise<Group[]> {
@@ -29,7 +28,7 @@ export class GroupController {
   }
 
   @Get(':id/usuarios')
-  async findUsuarios(@Param('id') id: number): Promise<Usuario[]> {
+  async findUsers(@Param('id') id: number): Promise<User[]> {
     return await this.usuarioService.findAllByGroupId(id);
   }
 
@@ -46,7 +45,7 @@ export class GroupController {
   }
 
   @Post(':id/usuarios')
-  async createUser(@Param('id') id: number, @Body() usuario: Usuario) {
+  async createUser(@Param('id') id: number, @Body() usuario: User) {
     console.log(usuario);
     const group = await this.groupService.findById(id);
     return this.usuarioService.create(usuario, group);

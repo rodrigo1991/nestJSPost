@@ -1,9 +1,9 @@
 import {BaseEntity,Column,Entity,Index,JoinColumn,JoinTable,ManyToMany,ManyToOne,OneToMany,OneToOne,PrimaryColumn,PrimaryGeneratedColumn,RelationId, UpdateDateColumn, CreateDateColumn} from 'typeorm';
-import {User} from '../user/user.entity';
+import {Comment} from '../comment/comment.entity';
 
 
-@Entity('groups',{schema:'nestjsPost' } )
-export class Group {
+@Entity('tags',{schema:'nestjsPost' } )
+export class Tag {
 
     @PrimaryGeneratedColumn({
         type:'int', 
@@ -20,15 +20,6 @@ export class Group {
     name:string;
         
 
-    @Column('varchar',{ 
-        nullable:false,
-        length:200,
-        name:'description'
-        })
-    description:string;
-        
-
-    
     @CreateDateColumn({ 
         nullable:false,
         name:'created'
@@ -44,7 +35,8 @@ export class Group {
         
 
    
-    @OneToMany(type=>User, users=>users.group,{ onDelete: 'NO ACTION' ,onUpdate: 'NO ACTION' })
-    userss:User[];
+    @ManyToMany(type=>Comment, comments=>comments.tags,{  nullable:false, })
+    @JoinTable({ name:'comments_tags'})
+    comments:Comment[];
     
 }
