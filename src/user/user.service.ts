@@ -12,15 +12,15 @@ export class UserService {
     private readonly userRepository: Repository<User>
   ) {}
 
-  async findAll(): Promise<User[]> {
-    return await this.userRepository.find();
+  findAll(): Promise<User[]> {
+    return this.userRepository.find();
   }
 
   async findAllByGroupId(groupId: number): Promise<User[]> {
     return await this.userRepository.find({group: {id: groupId}});
   }
 
-  async findById(id: number): Promise<User>{
+  async findById(id: number): Promise<User> {
     const user = await this.userRepository.findOne(id);
 
     if (!user) {

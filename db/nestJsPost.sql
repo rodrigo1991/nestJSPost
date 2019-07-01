@@ -158,35 +158,11 @@ LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `usuarios`
---
-
-DROP TABLE IF EXISTS `usuarios`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `usuarios` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `surname` varchar(255) NOT NULL,
-  `birthdate` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `created` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `updated` datetime(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
-  `groupId` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `FK_761f01b8e2a254e310f10deb982` (`groupId`),
-  CONSTRAINT `FK_761f01b8e2a254e310f10deb982` FOREIGN KEY (`groupId`) REFERENCES `groups` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `usuarios`
---
-
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-INSERT INTO `usuarios` VALUES (1,'Rodrigp','Rivero','2019-05-09 03:17:00.284475','2019-05-09 03:17:00.284475','2019-05-09 03:17:00.284475',1),(2,'Andrés','Sáez','2019-05-09 03:18:44.557423','2019-05-09 03:18:44.557423','2019-05-09 03:18:44.557423',2);
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,1,'Rodrigo','Rivero','2019-05-09 03:17:00.284475','2019-05-09 03:17:00.284475','2019-05-09 03:17:00.284475')
+,(2,2,'Andrés','Sáez','2019-05-09 03:18:44.557423','2019-05-09 03:18:44.557423','2019-05-09 03:18:44.557423');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

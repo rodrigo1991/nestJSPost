@@ -9,38 +9,38 @@ import {
 import { User } from './user.entity';
 
 @ApiBearerAuth()
-//@ApiUseTags('usuarios')
+//@ApiUseTags('users')
 @Controller('users')
 export class UserController {
 
-  constructor(private readonly usuarioService: UserService) {}
+  constructor(private readonly userservice: UserService) {}
 
   @Get()
-  async find(): Promise<User[]> {
-    return await this.usuarioService.findAll();
+  find(): Promise<User[]> {
+    return this.userservice.findAll();
   }
 
   @Get(':id')
   async findMe(@Param('id') id: number): Promise<User> {
-    return await this.usuarioService.findById(id);
+    return await this.userservice.findById(id);
   }
 
   @Put(':id')
   async update(@Param('id') id: number, @Body() usuario: User) {
     console.log(usuario);
-    return await this.usuarioService.update(id, usuario);
+    return await this.userservice.update(id, usuario);
   }
 
   @Post()
   async create(@Body() usuario: User) {
     console.log(usuario);
-    return this.usuarioService.create(usuario);
+    return this.userservice.create(usuario);
   }
 
   /*
-  @Delete('usuarios/:slug')
+  @Delete('users/:slug')
   async delete(@Param() params) {
-    return await this.usuarioService.delete(params.slug);
+    return await this.userservice.delete(params.slug);
   }*/
 
 }
