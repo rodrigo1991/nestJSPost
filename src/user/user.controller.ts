@@ -16,8 +16,23 @@ export class UserController {
   constructor(private readonly userservice: UserService) {}
 
   @Get()
-  find(): Promise<User[]> {
-    return this.userservice.findAll();
+  find(): User[] {
+    try{
+    const salida = this.userservice.findAll();
+    console.log(`salida directa ${salida}`);
+    salida.then(valor => 
+      console.log(`salida then`, valor)
+    );
+    const retorno = await this.userservice.findAll();
+    return retorno;
+
+    //const salidawait = await this.userservice.findAll();
+    //console.log(salidawait);
+    //return salidawait;
+    }
+    catch(err){
+      console.log(err);
+    }
   }
 
   @Get(':id')
