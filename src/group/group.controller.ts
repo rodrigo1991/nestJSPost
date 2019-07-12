@@ -15,7 +15,7 @@ import { User } from 'src/user/user.entity';
 export class GroupController {
 
   constructor(private readonly groupService: GroupService,
-              private readonly userservice: UserService) {}
+              private readonly userService: UserService) {}
 
   @Get()
   async find(): Promise<Group[]> {
@@ -29,7 +29,7 @@ export class GroupController {
 
   @Get(':id/users')
   async findUsers(@Param('id') id: number): Promise<User[]> {
-    return await this.userservice.findAllByGroupId(id);
+    return await this.userService.findAllByGroupId(id);
   }
 
   @Put(':id')
@@ -48,7 +48,7 @@ export class GroupController {
   async createUser(@Param('id') id: number, @Body() usuario: User) {
     console.log(usuario);
     const group = await this.groupService.findById(id);
-    return this.userservice.create(usuario, group);
+    return this.userService.create(usuario, group);
   }
 
   /*

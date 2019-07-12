@@ -13,15 +13,15 @@ export class PostService {
   ) {}
 
   async findAll(): Promise<Ppost[]> {
-    return await this.postRepository.find();
+    return await this.postRepository.find({relations: ['user']});
   }
 
   async findAllByUserId(userId: number): Promise<Ppost[]> {
-    return await this.postRepository.find({user: {id: userId}});
+    return await this.postRepository.find({where: {user: {id: userId}}, relations: ['user']});
   }
 
   async findById(id: number): Promise<Ppost>{
-    const post = await this.postRepository.findOne(id);
+    const post = await this.postRepository.findOne(id, {relations: ['user']});
 
     if (!post) {
       const errors = {Ppost: ' not found'};

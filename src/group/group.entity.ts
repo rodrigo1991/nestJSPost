@@ -39,6 +39,6 @@ export class Group {
 
    
     @OneToMany(type=>User, users=>users.group,{ onDelete: 'NO ACTION' ,onUpdate: 'NO ACTION' })
-    userss:User[];
+    users:User[];
     
 }

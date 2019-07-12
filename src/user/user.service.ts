@@ -13,16 +13,16 @@ export class UserService {
   ) {}
 
   async findAll(): Promise<User[]> {
-    return await this.userRepository.find();
+    return await this.userRepository.find({relations: ['group']});
   }
 
   async findAllByGroupId(groupId: number): Promise<User[]> {
-    return await this.userRepository.find({group: {id: groupId}});
+    return await this.userRepository.find({where: {group: {id: groupId}}, relations: ['group'] });
   }
 
   async findById(id: number): Promise<User> {
-    const user = await this.userRepository.findOne(id);
-
+    const user = await this.userRepository.findOne(id, {relations: ['group']});
+    console.log(user);
     if (!user) {
       const errors = {User: ' not found'};
       throw new HttpException({errors}, 400);
