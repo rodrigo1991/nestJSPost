@@ -1,6 +1,5 @@
 import {Column, Entity, Index, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, CreateDateColumn,  UpdateDateColumn} from 'typeorm';
 import {Group} from '../group/group.entity';
-import {Comment} from '../comment/comment.entity';
 import {Ppost} from '../post/post.entity';
 
 @Entity('users', {schema: 'nestjsPost' } )
@@ -42,9 +41,6 @@ export class User {
 
     @UpdateDateColumn()
     updated: Date;
-
-    @OneToMany(() => Comment,  comments => comments.user, { onDelete:  'NO ACTION' , onUpdate:  'NO ACTION' })
-    commentss: Comment[];
 
     @OneToMany(() => Ppost,  posts => posts.user, { onDelete:  'NO ACTION' , onUpdate:  'NO ACTION' })
     postss: Ppost[];

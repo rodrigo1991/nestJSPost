@@ -1,36 +1,39 @@
-import {BaseEntity,Column,Entity,Index,JoinColumn,JoinTable,ManyToMany,ManyToOne,OneToMany,OneToOne,PrimaryColumn,PrimaryGeneratedColumn,RelationId, UpdateDateColumn, CreateDateColumn} from 'typeorm';
-import {Comment} from '../comment/comment.entity';
+import {Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn, UpdateDateColumn,  CreateDateColumn} from 'typeorm';
+import {Ppost} from '../post/post.entity';
 
-
-@Entity('tags',{schema:'nestjsPost' } )
+@Entity('tags', {schema: 'nestjsPost' } )
 export class Tag {
 
     @PrimaryGeneratedColumn({
-        type:'int', 
-        name:'id'
+        type: 'int',
+        name: 'id',
         })
-    id:number;
-        
+    id: number;
 
-    @Column('varchar',{ 
-        nullable:false,
-        length:45,
-        name:'name'
+    @Column('varchar', {
+        nullable: false,
+        length: 45,
+        name: 'name',
         })
-    name:string;
-        
+    name: string;
 
     @CreateDateColumn()
-    created:Date;
-        
+    created: Date;
 
     @UpdateDateColumn()
-    updated:Date;
-        
+    updated: Date;
 
-   
-    @ManyToMany(type=>Comment, comments=>comments.tags,{  nullable:false, })
-    @JoinTable({ name:'comments_tags'})
-    comments:Comment[];
-    
+    @ManyToMany(() => Ppost,  posts => posts.tags)
+    @JoinTable({
+        name: 'post_tag',
+        joinColumn: {
+            name: 'post_id',
+            referencedColumnName: 'id',
+        },
+        inverseJoinColumn: {
+            name: 'tag_id',
+            referencedColumnName: 'id',
+        },
+    })
+    posts: Ppost[];
 }

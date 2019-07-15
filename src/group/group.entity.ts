@@ -1,44 +1,35 @@
-import {BaseEntity,Column,Entity,Index,JoinColumn,JoinTable,ManyToMany,ManyToOne,OneToMany,OneToOne,PrimaryColumn,PrimaryGeneratedColumn,RelationId, UpdateDateColumn, CreateDateColumn} from 'typeorm';
-import {User} from '../user/user.entity';
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn,  CreateDateColumn} from 'typeorm';
+import {User} from '../user/user.entity'; 
 
-
-@Entity('groups',{schema:'nestjsPost' } )
+@Entity('groups', {schema: 'nestjsPost' } )
 export class Group {
 
     @PrimaryGeneratedColumn({
-        type:'int', 
-        name:'id'
+        type: 'int',
+        name: 'id',
         })
-    id:number;
-        
+    id: number;
 
-    @Column('varchar',{ 
-        nullable:false,
-        length:45,
-        name:'name'
+    @Column('varchar', {
+        nullable: false,
+        length: 45,
+        name: 'name',
         })
-    name:string;
-        
+    name: string;
 
-    @Column('varchar',{ 
-        nullable:false,
-        length:200,
-        name:'description'
+    @Column('varchar', {
+        nullable: false,
+        length: 200,
+        name: 'description',
         })
-    description:string;
-        
+    description: string;
 
-    
     @CreateDateColumn()
-    created:Date;
-        
+    created: Date;
 
     @UpdateDateColumn()
-    updated:Date;
-        
+    updated: Date;
 
-   
-    @OneToMany(type=>User, users=>users.group,{ onDelete: 'NO ACTION' ,onUpdate: 'NO ACTION' })
-    users:User[];
-    
+    @OneToMany(() => User,  users => users.group, { onDelete:  'NO ACTION' , onUpdate:  'NO ACTION' })
+    users: User[];
 }

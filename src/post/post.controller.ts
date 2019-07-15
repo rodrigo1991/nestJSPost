@@ -7,15 +7,15 @@ import {
   ApiBearerAuth,
 } from '@nestjs/swagger';
 import { Ppost } from './post.entity';
-import { Comment } from 'src/comment/comment.entity';
-import { CommentService } from 'src/comment/comment.service';
+import { Tag } from 'src/tag/tag.entity';
+import { TagService } from 'src/tag/tag.service';
 
 @ApiBearerAuth()
 @Controller('posts')
 export class PostController {
 
   constructor(private readonly postService: PostService,
-              private readonly commentService: CommentService) {}
+              private readonly tagService: TagService) {}
 
   @Get()
   async find(): Promise<Ppost[]> {
@@ -28,16 +28,15 @@ export class PostController {
   }
 
 
-  @Get(':id/comments')
-  async findUsers(@Param('id') id: number): Promise<Ppost[]> {
-    return await this.commentService.findAllByPostId(id);
+  @Get(':id/tags')
+  async findTags(@Param('id') id: number): Promise<Tag[]> {
+    return await this.tagService.findAllByPostId(id);
   }
 
-  @Post(':id/comments')
-  async createPost(@Param('id') id: number, @Body() comment: Comment): Promise<Ppost> {
-    console.log(Ppost);
+  @Post(':id/tags')
+  async createTag(@Param('id') id: number, @Body() tag: Tag): Promise<Tag> {
     const post = await this.postService.findById(id);
-    return this.commentService.create(comment, post);
+    return this.tagService.create(tag, post);
   }
 
   @Put(':id')

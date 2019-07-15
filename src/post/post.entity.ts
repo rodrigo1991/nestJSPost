@@ -1,43 +1,35 @@
-import {BaseEntity,Column,Entity,Index,JoinColumn,JoinTable,ManyToMany,ManyToOne,OneToMany,OneToOne,PrimaryColumn,PrimaryGeneratedColumn,RelationId, UpdateDateColumn, CreateDateColumn} from 'typeorm';
+import {Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn,  CreateDateColumn, ManyToMany} from 'typeorm';
 import {User} from '../user/user.entity';
-import {Comment} from '../comment/comment.entity';
+import {Tag} from '../tag/tag.entity';
 
-
-@Entity('posts',{schema:'nestjsPost' } )
-@Index('fk_posts_1_idx',['user',])
+@Entity('posts', {schema: 'nestjsPost' } )
+@Index('fk_posts_1_idx', ['user'])
 export class Ppost {
 
     @PrimaryGeneratedColumn({
-        type:'int', 
-        name:'id'
+        type: 'int',
+        name: 'id',
         })
-    id:number;
-        
+    id: number;
 
-   
-    @ManyToOne(type=>User, users=>users.postss,{  nullable:false,onDelete: 'NO ACTION',onUpdate: 'NO ACTION' })
-    @JoinColumn({ name:'user_id'})
-    user:User | null;
+    @ManyToOne(() => User,  users => users.postss, {  nullable: false, onDelete:  'NO ACTION', onUpdate:  'NO ACTION' })
+    @JoinColumn({ name: 'user_id'})
+    user: User | null;
 
-
-    @Column('varchar',{ 
-        nullable:false,
-        length:45,
-        name:'texto'
+    @Column('varchar', {
+        nullable: false,
+        length: 45,
+        name: 'texto',
         })
-    texto:string;
-        
+    texto: string;
 
     @CreateDateColumn()
-    created:Date;
-        
+    created: Date;
 
     @UpdateDateColumn()
-    updated:Date;
-        
+    updated: Date;
 
-   
-    @OneToMany(type=>Comment, comments=>comments.post,{ onDelete: 'NO ACTION' ,onUpdate: 'NO ACTION' })
-    comments:Comment[];
-    
+    @ManyToMany(() => Tag,  tags => tags.posts)
+    tags: Tag[];
+
 }

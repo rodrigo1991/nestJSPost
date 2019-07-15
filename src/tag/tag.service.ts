@@ -2,6 +2,7 @@ import { Injectable, HttpException } from '@nestjs/common';
 import { TypeOrmModule, InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Tag } from './tag.entity';
+import { Ppost } from 'src/post/post.entity';
 
 @Injectable()
 export class TagService {
@@ -26,12 +27,17 @@ export class TagService {
     return tag;
   }
 
-  async create(tag: Tag): Promise<Tag> {
+  async findAllByPostId(postId: number): Promise<Tag[]> {
+    return await this.tagRepository.find({where: {post: {id: postId}}, relations: ['post'] });
+  }
+
+  async create(tag: Tag, post: Ppost): Promise<Tag> {
 
     const newTag = new Tag();
     newTag.name = tag.name;
     newTag.created = tag.created;
     newTag.updated = tag.updated;
+    newTag.posts = [post];
 
     return await this.tagRepository.save(newTag);
 
