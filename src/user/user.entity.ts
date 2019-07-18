@@ -14,7 +14,7 @@ export class User {
 
     @ManyToOne(() => Group,  groups => groups.users, {  nullable: false, onDelete:  'NO ACTION', onUpdate:  'NO ACTION'})
     @JoinColumn({ name: 'group_id'})
-    group: Group | null;
+    group: Group;
 
     @Column('varchar', {
         nullable: false,

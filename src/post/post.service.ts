@@ -9,7 +9,7 @@ export class PostService {
 
   constructor(
     @InjectRepository(Ppost)
-    private readonly postRepository: Repository<Ppost>
+    private readonly postRepository: Repository<Ppost>,
   ) {}
 
   async findAll(): Promise<Ppost[]> {

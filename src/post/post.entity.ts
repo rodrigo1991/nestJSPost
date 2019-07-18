@@ -14,7 +14,7 @@ export class Ppost {
 
     @ManyToOne(() => User,  users => users.postss, {  nullable: false, onDelete:  'NO ACTION', onUpdate:  'NO ACTION' })
     @JoinColumn({ name: 'user_id'})
-    user: User | null;
+    user: User;
 
     @Column('varchar', {
         nullable: false,
