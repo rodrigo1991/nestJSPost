@@ -8,5 +8,4 @@
   "entities": ["src/**/**.entity{.ts,.js}"],
   "logger": "typeormLoggerService",
   "logging": true
-  ,"synchronize": true
 }
