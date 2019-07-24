@@ -1,4 +1,4 @@
-import {Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn,  CreateDateColumn, ManyToMany} from 'typeorm';
+import {Column, Entity, Index, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn,  CreateDateColumn, ManyToMany, JoinTable} from 'typeorm';
 import {User} from '../user/user.entity';
 import {Tag} from '../tag/tag.entity';
 
@@ -12,7 +12,7 @@ export class Ppost {
         })
     id: number;
 
-    @ManyToOne(() => User,  users => users.postss, {  nullable: false, onDelete:  'NO ACTION', onUpdate:  'NO ACTION' })
+    @ManyToOne(() => User,  users => users.posts, {  nullable: false, onDelete:  'NO ACTION', onUpdate:  'NO ACTION' })
     @JoinColumn({ name: 'user_id'})
     user: User;
 
@@ -30,6 +30,17 @@ export class Ppost {
     updated: Date;
 
     @ManyToMany(() => Tag,  tags => tags.posts)
+    @JoinTable({
+        name: 'post_tag',
+        joinColumn: {
+            name: 'post_id',
+            referencedColumnName: 'id',
+        },
+        inverseJoinColumn: {
+            name: 'tag_id',
+            referencedColumnName: 'id',
+        },
+    })
     tags: Tag[];
 
 }

@@ -23,17 +23,6 @@ export class Tag {
     @UpdateDateColumn()
     updated: Date;
 
-    @ManyToMany(() => Ppost,  posts => posts.tags)
-    @JoinTable({
-        name: 'post_tag',
-        joinColumn: {
-            name: 'post_id',
-            referencedColumnName: 'id',
-        },
-        inverseJoinColumn: {
-            name: 'tag_id',
-            referencedColumnName: 'id',
-        },
-    })
+    @ManyToMany(() => Ppost,  posts => posts.tags)    
     posts: Ppost[];
 }

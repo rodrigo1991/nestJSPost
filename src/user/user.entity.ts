@@ -43,6 +43,6 @@ export class User {
     updated: Date;
 
     @OneToMany(() => Ppost,  posts => posts.user, { onDelete:  'NO ACTION' , onUpdate:  'NO ACTION' })
-    postss: Ppost[];
+    posts: Ppost[];
 
 }

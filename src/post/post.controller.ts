@@ -36,7 +36,17 @@ export class PostController {
   @Post(':id/tags')
   async createTag(@Param('id') id: number, @Body() tag: Tag): Promise<Tag> {
     const post = await this.postService.findById(id);
-    return this.tagService.create(tag, post);
+    return this.tagService.createWithPost(tag, post);
+  }
+
+  /**
+   * associates tags to a post
+   * @param id 
+   * @param tag 
+   */
+  @Put(':id/tags')
+  async updateTag(@Param('id') id: number, @Body() tag: Tag[]): Promise<Ppost> {
+    return this.postService.associateTags(tag, id);
   }
 
   @Put(':id')

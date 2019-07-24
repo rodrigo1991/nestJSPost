@@ -1,4 +1,4 @@
-import { Get, Post, Delete, Param, Controller, Put, Body } from '@nestjs/common';
+import { Get, Post, Delete, Param, Controller, Put, Body, Query } from '@nestjs/common';
 import { Request } from 'express';
 import { UserService } from './user.service';
 
@@ -19,8 +19,9 @@ export class UserController {
               private readonly postService: PostService) {}
 
   @Get()
-  async find(): Promise<User[]> {
-    return await this.userService.findAll();
+  async find(@Query() query): Promise<User[]> {
+    console.log(query);
+    return await this.userService.findAll(query.filter, query.relations);
   }
 
   @Get(':id')

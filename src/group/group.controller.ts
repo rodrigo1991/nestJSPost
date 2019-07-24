@@ -1,4 +1,4 @@
-import { Get, Post, Delete, Param, Controller, Put, Body } from '@nestjs/common';
+import { Get, Post, Delete, Param, Controller, Put, Body, Query } from '@nestjs/common';
 import { Request } from 'express';
 import { GroupService } from './group.service';
 
@@ -28,8 +28,10 @@ export class GroupController {
   }
 
   @Get(':id/users')
-  async findUsers(@Param('id') id: number): Promise<User[]> {
-    return await this.userService.findAllByGroupId(id);
+  async findUsers(@Param('id') id: number, @Query() query): Promise<User[]> {
+    const filter = {group: {id: id}};
+    const filtro = JSON.stringify(filter);
+    return await this.userService.findAll(filtro,query.relations);
   }
 
   @Put(':id')

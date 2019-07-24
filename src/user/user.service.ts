@@ -12,13 +12,21 @@ export class UserService {
     private readonly userRepository: Repository<User>
   ) {}
 
-  async findAll(): Promise<User[]> {
-    return await this.userRepository.find({relations: ['group']});
+  //http://127.0.0.1:3000/api/users?filter=%7B%22name%22%3A%22Rodrigo%22%7D&relations[]=group&relations[]=posts
+  async findAll(filter:string, relations: string[]): Promise<User[]> {
+    console.log(filter);
+    if(filter){
+      filter = JSON.parse(filter);
+    }
+    
+    console.log({relations: relations});
+    return await this.userRepository.find({where:filter,relations: relations});
   }
 
-  async findAllByGroupId(groupId: number): Promise<User[]> {
-    return await this.userRepository.find({where: {group: {id: groupId}}, relations: ['group'] });
-  }
+  //http://127.0.0.1:3000/api/users?filter=%7B%22group%22%3A+%7B%22id%22%3A+1%7D%7D&relations[]=group
+  //async findAllByGroupId(groupId: number): Promise<User[]> {
+    //return await this.userRepository.find({where: {group: {id: groupId}}, relations: ['group'] });
+  //}
 
   async findById(id: number): Promise<User> {
     const user = await this.userRepository.findOne(id, {relations: ['group']});
