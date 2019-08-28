@@ -1,4 +1,4 @@
-import { Get, Post, Delete, Param, Controller, Put, Body } from '@nestjs/common';
+import { Get, Post, Delete, Param, Controller, Put, Body, HttpException } from '@nestjs/common';
 import { Request } from 'express';
 import { PostService } from './post.service';
 
@@ -46,7 +46,12 @@ export class PostController {
    */
   @Put(':id/tags')
   async updateTag(@Param('id') id: number, @Body() tag: Tag[]): Promise<Ppost> {
-    return this.postService.associateTags(tag, id);
+    try{
+      return await this.postService.associateTags(tag, id);
+    }catch(err){
+      console.log('error', err);
+      throw new HttpException(err, 500);      
+    }
   }
 
   @Put(':id')
