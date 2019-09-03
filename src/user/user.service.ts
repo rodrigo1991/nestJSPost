@@ -3,6 +3,7 @@ import { TypeOrmModule, InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { Group } from 'src/group/group.entity';
+//import {paginate, Pagination, IPaginationOptions} from 'nestjs-typeorm-paginate';
 
 @Injectable()
 export class UserService {
@@ -11,29 +12,42 @@ export class UserService {
     @InjectRepository(User)
     private readonly userRepository: Repository<User>
   ) {}
+/*
+  async findAll(paginationOptions: IPaginationOptions, options: any): Promise<Pagination<User>> {
 
-  //http://127.0.0.1:3000/api/users?filter=%7B%22name%22%3A%22Rodrigo%22%7D&relations[]=group&relations[]=posts
-  async findAll(filter:string, sort:string, relations: string[]): Promise<User[]> {
-
-    let jfilter: {};
-    let jsort: {};
-
-    console.log(filter);
-    console.log(sort);
-    if(filter){
-      jfilter = JSON.parse(filter);
+    if(options.where){
+      options.where = JSON.parse(options.where);
     }
 
-    if(sort){
-      jsort = JSON.parse(sort);
+    if(options.order){
+      options.order = JSON.parse(options.order);
     }
-    console.log({relations: relations});
-    return await this.userRepository.find({
-      where: jfilter, 
-      relations: relations, 
-      order: jsort
-    });
+
+    return await paginate<User>(this.userRepository, paginationOptions, options);
   }
+  */
+
+  //http://127.0.0.1:3000/api/users?where=%7B%22name%22%3A%22rodrigo%22%7D&relations[]=group&relations[]=posts&order=%7B%22name%22%3A%22ASC%22%7D
+  async findAll(options: any): Promise<any> {
+
+    options.take = options.take || 10;
+    options.skip = options.skip || 0;
+    
+    if(options.where){
+      options.where = JSON.parse(options.where);
+    }
+
+    if(options.order){
+      options.order = JSON.parse(options.order);
+    }
+    console.log(options);
+    const [result, total] = await this.userRepository.findAndCount(options);
+    return {
+      data: result,
+      count: total
+    }
+  }
+  
 
   //http://127.0.0.1:3000/api/users?filter=%7B%22group%22%3A+%7B%22id%22%3A+1%7D%7D&relations[]=group
   //async findAllByGroupId(groupId: number): Promise<User[]> {

@@ -17,11 +17,17 @@ export class UserController {
 
   constructor(private readonly userService: UserService,
               private readonly postService: PostService) {}
-
+  /*
+  @Get()
+  async find(@Query('page') page: number = 0, @Query('limit') limit: number = 10, @Query() query) {
+    limit = limit > 100 ? 100 : limit;
+    return await this.userService.findAll({page, limit, route: 'http://127.0.0.1:3000/api/users'}, query);
+  }
+  */
   @Get()
   async find(@Query() query): Promise<User[]> {
     console.log(query);
-    return await this.userService.findAll(query.filter, query.sort, query.relations);
+    return await this.userService.findAll(query);
   }
 
   @Get(':id')
