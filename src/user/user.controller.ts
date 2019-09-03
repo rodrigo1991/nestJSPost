@@ -21,7 +21,7 @@ export class UserController {
   @Get()
   async find(@Query() query): Promise<User[]> {
     console.log(query);
-    return await this.userService.findAll(query.filter, query.relations);
+    return await this.userService.findAll(query.filter, query.sort, query.relations);
   }
 
   @Get(':id')

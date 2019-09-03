@@ -13,14 +13,26 @@ export class UserService {
   ) {}
 
   //http://127.0.0.1:3000/api/users?filter=%7B%22name%22%3A%22Rodrigo%22%7D&relations[]=group&relations[]=posts
-  async findAll(filter:string, relations: string[]): Promise<User[]> {
+  async findAll(filter:string, sort:string, relations: string[]): Promise<User[]> {
+
+    let jfilter: {};
+    let jsort: {};
+
     console.log(filter);
+    console.log(sort);
     if(filter){
-      filter = JSON.parse(filter);
+      jfilter = JSON.parse(filter);
     }
-    
+
+    if(sort){
+      jsort = JSON.parse(sort);
+    }
     console.log({relations: relations});
-    return await this.userRepository.find({where:filter,relations: relations});
+    return await this.userRepository.find({
+      where: jfilter, 
+      relations: relations, 
+      order: jsort
+    });
   }
 
   //http://127.0.0.1:3000/api/users?filter=%7B%22group%22%3A+%7B%22id%22%3A+1%7D%7D&relations[]=group
