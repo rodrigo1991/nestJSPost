@@ -11,10 +11,16 @@ import { Crud } from '@nestjsx/crud';
 @Crud({
   model: {
     type: User,
+  },
+  params: {
+    groupId: {
+      field: 'group',
+      type: 'number'
+    }
   }
 })
-@ApiUseTags('users')
-@Controller('users')
+@ApiUseTags('groups')
+@Controller('/groups/:groupId/users')
 export class UserController {
   constructor(public service: UserService) {}
 }

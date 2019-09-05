@@ -1,62 +1,20 @@
-import { Get, Post, Delete, Param, Controller, Put, Body, Query } from '@nestjs/common';
-import { Request } from 'express';
-import { GroupService } from './group.service';
+import { Controller } from '@nestjs/common';
 
 import {
-  ApiUseTags,
-  ApiBearerAuth,
+  ApiBearerAuth, ApiUseTags,
 } from '@nestjs/swagger';
+import { Crud } from '@nestjsx/crud';
+import { GroupService } from './group.service';
 import { Group } from './group.entity';
-import { UserService } from 'src/user/user.service';
-import { User } from 'src/user/user.entity';
 
 @ApiBearerAuth()
+@Crud({
+  model: {
+    type: Group,
+  }
+})
+@ApiUseTags('groups')
 @Controller('groups')
 export class GroupController {
-
-  constructor(private readonly groupService: GroupService,
-              private readonly userService: UserService) {}
-
-  @Get()
-  async find(): Promise<Group[]> {
-    return await this.groupService.findAll();
-  }
-
-  @Get(':id')
-  async findOne(@Param('id') id: number): Promise<Group> {
-    return await this.groupService.findById(id);
-  }
-
-  @Get(':id/users')
-  async findUsers(@Param('id') id: number, @Query() query): Promise<User[]> {
-    const filter = {group: {id: id}};
-    const filtro = JSON.stringify(filter);
-    return await this.userService.findAll(filtro,query.relations);
-  }
-
-  @Put(':id')
-  async update(@Param('id') id: number, @Body() group: Group) {
-    console.log(group);
-    return await this.groupService.update(id, group);
-  }
-
-  @Post()
-  async create(@Body() group: Group) {
-    console.log(group);
-    return this.groupService.create(group);
-  }
-
-  @Post(':id/users')
-  async createUser(@Param('id') id: number, @Body() usuario: User) {
-    console.log(usuario);
-    const group = await this.groupService.findById(id);
-    return this.userService.create(usuario, group);
-  }
-
-  /*
-  @Delete('groups/:slug')
-  async delete(@Param() params) {
-    return await this.groupService.delete(params.slug);
-  }*/
-
+  constructor(public service: GroupService) {}
 }
