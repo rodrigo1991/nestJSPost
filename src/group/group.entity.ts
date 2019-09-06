@@ -1,5 +1,5 @@
 import {Column, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn,  CreateDateColumn} from 'typeorm';
-import {User} from '../user/user.entity'; 
+import {User} from '../user/user.entity';
 
 @Entity('groups', {schema: 'nestjsPost' } )
 export class Group {

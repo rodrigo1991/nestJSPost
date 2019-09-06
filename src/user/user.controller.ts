@@ -11,6 +11,11 @@ import { Crud } from '@nestjsx/crud';
 @Crud({
   model: {
     type: User,
+  },
+  query: {
+    join: {
+      group: {}
+    }
   }
 })
 @ApiUseTags('users')

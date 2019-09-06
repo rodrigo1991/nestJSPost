@@ -17,6 +17,11 @@ import { Crud } from '@nestjsx/crud';
       field: 'group',
       type: 'number'
     }
+  },
+  query: {
+    join: {
+      group: {}
+    }
   }
 })
 @ApiUseTags('groups')
