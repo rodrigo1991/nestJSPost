@@ -20,7 +20,8 @@ import { Crud } from '@nestjsx/crud';
   },
   query: {
     join: {
-      user: {}
+      user: {},
+      tags: {}
     }
   }
 })

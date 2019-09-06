@@ -13,7 +13,7 @@ export class User {
     id: number;
 
     @ManyToOne(() => Group,  groups => groups.users, {  nullable: false, onDelete:  'NO ACTION', onUpdate:  'NO ACTION'})
-    @JoinColumn({ name: 'group_id'})
+    @JoinColumn({ name: 'fk_group_id' })
     group: Group;
 
     @Column('varchar', {

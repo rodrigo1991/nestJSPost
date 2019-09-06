@@ -13,7 +13,7 @@ export class Ppost {
     id: number;
 
     @ManyToOne(() => User,  users => users.posts, {  nullable: false, onDelete:  'NO ACTION', onUpdate:  'NO ACTION' })
-    @JoinColumn({ name: 'user_id'})
+    @JoinColumn({ name: 'fk_user_id'})
     user: User;
 
     @Column('varchar', {
@@ -33,11 +33,11 @@ export class Ppost {
     @JoinTable({
         name: 'post_tag',
         joinColumn: {
-            name: 'post_id',
+            name: 'fk_post_id',
             referencedColumnName: 'id',
         },
         inverseJoinColumn: {
-            name: 'tag_id',
+            name: 'fk_tag_id',
             referencedColumnName: 'id',
         },
     })

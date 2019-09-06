@@ -15,7 +15,7 @@ import { Ppost } from './post.entity';
   query: {
     join: {
       user: {},
-      tags: {},
+      tags: {}
     }
   }
 })
