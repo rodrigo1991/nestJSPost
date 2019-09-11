@@ -3,8 +3,11 @@
   "host": "127.0.0.1",
   "port": 3306,
   "username": "root",
+  //5VBpMlYdrb
   "password": "root",
+  //3GisvOWfFo
   "database": "nestjsPost",
+  //5VBpMlYdrb
   "entities": ["src/**/**.entity{.ts,.js}"],
   "logger": "typeormLoggerService",
   "logging": true

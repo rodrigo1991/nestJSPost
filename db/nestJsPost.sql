@@ -36,11 +36,10 @@ CREATE TABLE `groups` (
 -- Dumping data for table `groups`
 --
 
-LOCK TABLES `groups` WRITE;
 /*!40000 ALTER TABLE `groups` DISABLE KEYS */;
 INSERT INTO `groups` VALUES (1,'Admin','admin del sistema','2019-07-23 11:44:15.745340','2019-07-23 11:44:15.745340'),(2,'Users','usuarios del sistema','2019-07-23 11:44:26.018142','2019-07-23 11:44:26.018142');
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
-UNLOCK TABLES;
+
 
 --
 -- Table structure for table `post_tag`
@@ -64,11 +63,9 @@ CREATE TABLE `post_tag` (
 -- Dumping data for table `post_tag`
 --
 
-LOCK TABLES `post_tag` WRITE;
 /*!40000 ALTER TABLE `post_tag` DISABLE KEYS */;
 INSERT INTO `post_tag` VALUES (1,1),(2,1),(2,2),(2,7),(2,8),(2,9),(2,10),(3,1);
 /*!40000 ALTER TABLE `post_tag` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `posts`
@@ -92,12 +89,10 @@ CREATE TABLE `posts` (
 --
 -- Dumping data for table `posts`
 --
-
-LOCK TABLES `posts` WRITE;
 /*!40000 ALTER TABLE `posts` DISABLE KEYS */;
 INSERT INTO `posts` VALUES (1,'Mi primer post de prueba','2019-07-24 11:47:12.093281','2019-07-24 11:47:12.093281',1),(2,'2do actualizado por segunda vez','2019-07-24 11:47:33.213572','2019-07-24 16:36:22.000000',1),(3,'Haciendo un post con otro usuario','2019-07-24 11:48:43.372868','2019-07-24 11:48:43.372868',2),(4,'Post con tipo usuario','2019-07-24 11:48:54.510633','2019-07-24 11:48:54.510633',3);
 /*!40000 ALTER TABLE `posts` ENABLE KEYS */;
-UNLOCK TABLES;
+
 
 --
 -- Table structure for table `tags`
@@ -119,11 +114,9 @@ CREATE TABLE `tags` (
 -- Dumping data for table `tags`
 --
 
-LOCK TABLES `tags` WRITE;
 /*!40000 ALTER TABLE `tags` DISABLE KEYS */;
 INSERT INTO `tags` VALUES (1,'Informática','2019-07-24 12:18:31.186195','2019-07-24 12:18:31.186195'),(2,'aaaaaaaaaaaaa','2019-07-24 12:18:39.079533','2019-07-24 15:50:00.000000'),(3,'Cualquier weá','2019-07-24 12:18:47.107473','2019-07-24 12:18:47.107473'),(4,'Niuna weá','2019-07-24 12:18:52.112907','2019-07-24 12:18:52.112907'),(5,'De todo','2019-07-24 12:18:58.098210','2019-07-24 12:18:58.098210'),(6,'Electrónica','2019-07-24 12:19:09.432460','2019-07-24 12:19:09.432460'),(7,'Ocio','2019-07-24 12:19:20.839688','2019-07-24 12:19:20.839688'),(8,'Aburrimiento','2019-07-24 12:19:24.058292','2019-07-24 12:19:24.058292'),(9,'Terror','2019-07-24 12:19:27.500773','2019-07-24 12:19:27.500773'),(10,'Acción','2019-07-24 12:19:29.989200','2019-07-24 12:19:29.989200');
 /*!40000 ALTER TABLE `tags` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
@@ -150,11 +143,9 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
 INSERT INTO `users` VALUES (1,'Rodrigo','Rivero','1991-04-01 20:00:00','2019-07-23 11:46:29.292402','2019-07-23 11:46:29.292402',1),(2,'Andrés','Sáez','1991-04-01 20:00:00','2019-07-23 11:48:28.761217','2019-07-23 11:48:28.761217',1),(3,'Felipe','Olavarría','1991-04-01 20:00:00','2019-07-23 11:48:54.114461','2019-07-23 11:48:54.114461',2);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
